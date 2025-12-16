@@ -1,20 +1,17 @@
 import { Pool } from "pg";
 
 function buildConfig() {
-    if (process.env.DATABASE_URL) {
-        const isNeon = process.env.DATABASE_URL.includes("neon.tech");
-        return {
-            connectionString: process.env.DATABASE_URL,
-            ssl: isNeon ? { rejectUnauthorized: false } : undefined
-        };
+    const url = process.env.DATABASE_URL;
+
+    if (!url) {
+        throw new Error("DATABASE_URL is missing in environment variables");
     }
 
+    const isNeon = url.includes("neon.tech");
+
     return {
-        host: process.env.PGHOST ?? "localhost",
-        port: Number(process.env.PGPORT ?? 5432),
-        user: process.env.PGUSER ?? "root",
-        password: process.env.PGPASSWORD ?? "LahiruDev123",
-        database: process.env.PGDATABASE ?? "reservation_db"
+        connectionString: url,
+        ssl: isNeon ? { rejectUnauthorized: false } : undefined
     };
 }
 
