@@ -22,3 +22,7 @@ start().catch((err) => {
     console.error("Failed to start server:", err);
     process.exit(1);
 });
+
+console.log("ENV DATABASE_URL exists:", !!process.env.DATABASE_URL);
+console.log("ENV DATABASE_URL host preview:", process.env.DATABASE_URL?.split("@")[1]?.split("/")[0]);
+
