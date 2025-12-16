@@ -1,0 +1,13 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.routes = void 0;
+const express_1 = require("express");
+const movies_routes_1 = require("./movies.routes");
+const seats_routes_1 = require("./seats.routes");
+const reservations_routes_1 = require("./reservations.routes");
+const theatres_routes_1 = require("./theatres.routes");
+exports.routes = (0, express_1.Router)();
+exports.routes.use("/movies", movies_routes_1.moviesRoutes);
+exports.routes.use("/seats", seats_routes_1.seatsRoutes);
+exports.routes.use("/reservations", reservations_routes_1.reservationsRoutes);
+exports.routes.use("/theatres", theatres_routes_1.theatresRoutes);
